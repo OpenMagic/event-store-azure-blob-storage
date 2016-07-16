@@ -1,6 +1,6 @@
 {
   "name": "event-store-azure-blob-storage",
-  "version": "0.2.0-0",
+  "version": "0.3.0-0",
   "description": ".NET Event Store using Azure Blob storage",
   "scripts": {
     "publish": "echo Use publish.cmd or node tasks publish && exit 1",
