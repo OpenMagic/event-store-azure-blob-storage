@@ -1,0 +1,26 @@
+{
+  "name": "event-store-azure-blob-storage",
+  "version": "0.1.0",
+  "description": ".NET Event Store using Azure Blob storage",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "postinstall": "npm-nuget restore",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenMagic/event-store-azure-blob-storage.git"
+  },
+  "author": "Tim Murphy <tim@26tp.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OpenMagic/event-store-azure-blob-storage/issues"
+  },
+  "homepage": "https://github.com/OpenMagic/event-store-azure-blob-storage#readme",
+  "devDependencies": {
+    "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v3.1.3"
+  },
+  "private": true
+}
