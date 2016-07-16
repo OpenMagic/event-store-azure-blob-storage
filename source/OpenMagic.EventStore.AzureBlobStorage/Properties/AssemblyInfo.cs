@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using Anotar.LibLog;
 using OpenMagic.EventStore.AzureBlobStorage;
 
@@ -8,4 +9,5 @@ using OpenMagic.EventStore.AzureBlobStorage;
 [assembly: AssemblyCopyright(Constants.Assembly.Copyright)]
 [assembly: AssemblyVersion(Constants.Assembly.Version)]
 [assembly: AssemblyFileVersion(Constants.Assembly.FileVersion)]
+[assembly: InternalsVisibleTo("OpenMagic.EventStore.AzureBlobStorage.Specifications")]
 [assembly: LogMinimalMessage]
