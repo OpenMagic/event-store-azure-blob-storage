@@ -6,4 +6,4 @@
 
 - install
 - test
-- publish
+- publish <newversion> where <newversion> is one of [major, minor, patch, premajor, preminor, prepatch, prerelease, from-git]
