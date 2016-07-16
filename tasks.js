@@ -55,12 +55,42 @@ target.postinstall = function () {
     console.log('Successfully generated SpecFlow unit test classes.');
 }
 
+// Publish the package
+target.publish = function (args) {
+    runningTask('publish');
+
+    const newVersion = getNewVersionArgument(args);
+
+    // npm version will:
+    //      - Run tests
+    //      - Update version number in package.json and Constants.cs
+    //      - Stage the version number changes to the Git repositoty
+    //      - Create the nuget package
+    //       
+    // See tasks 'npm_preversion, npm_version, npm_postversion' for more details 
+    //shell.exec(`npm version ${newVersion}`);
+
+    // Push the latest commits and related tags to remote server
+    //shell.exec(`git push --follow-tags`);
+
+    completedTask('publish');
+}
+
 // Run all tests
 target.test = function (args) {
     target.compile();
     runningTask('test');
     shell.exec(`${config.xunit.cmd} ${config.xunit.assemblies}`);
     completedTask('test');
+}
+
+// Get npm version argument
+function getNewVersionArgument(args) {
+    if (args == null || args.length !== 1) {
+        writePublishUsage();
+        process.exit(1);
+    }
+    return args[0];
 }
 
 // Log a task has completed
@@ -73,5 +103,15 @@ function completedTask(name) {
 // Log a task is starting
 function runningTask(name) {
     console.log(`Starting ${name} task...`);
+    console.log();
+}
+
+// 
+function writePublishUsage() {
+    console.log();
+    console.log(`Usage: publish <newversion> or node tasks publish <newversion>`);
+    console.log();
+    console.log(`where <newversion> is one of:`);
+    console.log(`    major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`);
     console.log();
 }

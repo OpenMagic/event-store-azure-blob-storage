@@ -4,5 +4,6 @@
 
 ## Tasks
 
-npm install
-npm test
+- install
+- test
+- publish

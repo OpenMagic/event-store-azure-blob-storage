@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": ".NET Event Store using Azure Blob storage",
   "scripts": {
-    "postinstall": "node tasks.js postinstall",
-    "test": "node tasks.js test"
+    "publish": "echo Use publish.cmd or node tasks publish && exit 1",
+    "postinstall": "node tasks postinstall",
+    "test": "node tasks test"
   },
   "repository": {
     "type": "git",
