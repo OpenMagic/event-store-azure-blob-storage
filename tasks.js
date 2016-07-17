@@ -66,7 +66,8 @@ target.publish = function (args) {
     const newVersion = getNewVersionArgument(args);
     const currentBranch = git.branch();
 
-    createPublishBranch();
+    deleteGitBranchIfExists('publish')
+    createAndCheckoutGitBranch('publish');
     updateVersion(newVersion);
     createPackage();
     mergePublishBranch(currentBranch);
@@ -84,6 +85,19 @@ target.test = function (args) {
     runningTask('test');
     shell.exec(`${config.xunit.cmd} ${config.xunit.assemblies}`);
     completedTask('test');
+}
+
+function createAndCheckoutGitBranch(branchName) {
+    console.log(`Creating branch '${branchName}`);
+    shell.exec(`git checkout -b ${branchName}`);
+}
+
+function deleteGitBranchIfExists(branchName) {
+    if (shell.exec(`git show-ref --verify --quiet refs/heads/${branchName}`) == 0){
+        return;
+    }
+    console.log(`Deleting branch '${branchName}`);
+    shell.exec(`git branch -d ${branchName}`);
 }
 
 // Get npm version argument
@@ -110,7 +124,7 @@ function runningTask(name) {
 }
 
 // Update the version number
-function updateVersion (newVersion) {
+function updateVersion(newVersion) {
 
 
     // npm version will:
@@ -139,5 +153,5 @@ function validateGitIsClean() {
         return;
     }
     console.log('Git repository must be clean before running the requested task.')
-    process.exit(1);    
+    process.exit(1);
 }
