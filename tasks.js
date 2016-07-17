@@ -88,12 +88,12 @@ target.test = function (args) {
 }
 
 function createAndCheckoutGitBranch(branchName) {
-    console.log(`Creating branch '${branchName}`);
+    console.log(`Creating branch '${branchName}'`);
     shell.exec(`git checkout -b ${branchName}`);
 }
 
 function deleteGitBranchIfExists(branchName) {
-    if (shell.exec(`git show-ref --verify --quiet refs/heads/${branchName}`) == 0){
+    if (shell.exec(`git show-ref --verify --quiet refs/heads/${branchName}`).code == 0){
         return;
     }
     console.log(`Deleting branch '${branchName}`);
