@@ -21,6 +21,7 @@ const config = {
 
 require('shelljs/make');
 
+const isGitClean = require('is-git-clean');
 const mkdirp = require('mkdirp');
 const msbuild = require('npm-msbuild');
 const npmPackage = require('./package.json');
@@ -58,21 +59,11 @@ target.postinstall = function () {
 // Publish the package
 target.publish = function (args) {
     runningTask('publish');
-
-    const newVersion = getNewVersionArgument(args);
-
-    // npm version will:
-    //      - Run tests
-    //      - Update version number in package.json and Constants.cs
-    //      - Stage the version number changes to the Git repositoty
-    //      - Create the nuget package
-    //       
-    // See tasks 'npm_preversion, npm_version, npm_postversion' for more details 
-    //shell.exec(`npm version ${newVersion}`);
-
-    // Push the latest commits and related tags to remote server
-    //shell.exec(`git push --follow-tags`);
-
+    validateGitIsClean();
+    const newVersion = getNewVersionArgument();
+    updateVersion(newVersion);
+    createPackage();
+    pushRepository();
     completedTask('publish');
 }
 
@@ -87,6 +78,7 @@ target.test = function (args) {
 // Get npm version argument
 function getNewVersionArgument(args) {
     if (args == null || args.length !== 1) {
+        console.log(args);
         writePublishUsage();
         process.exit(1);
     }
@@ -106,7 +98,7 @@ function runningTask(name) {
     console.log();
 }
 
-// 
+// Write how to use publish command 
 function writePublishUsage() {
     console.log();
     console.log(`Usage: publish <newversion> or node tasks publish <newversion>`);
@@ -114,4 +106,31 @@ function writePublishUsage() {
     console.log(`where <newversion> is one of:`);
     console.log(`    major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`);
     console.log();
+}
+
+// Check git repository is clean. Exits with 1 if it isn't.
+function validateGitIsClean() {
+    if (isGitClean.sync()) {
+        return;
+    }
+    console.log('Git repository must be clean before running the requested task.')
+    process.exit(1);    
+}
+
+// Update the version number
+function version (newVersion) {
+
+
+    // npm version will:
+    //      - Run tests
+    //      - Update version number in package.json and Constants.cs
+    //      - Stage the version number changes to the Git repository
+    //      - Create the nuget package
+    //       
+    // See tasks 'npm_preversion, npm_version, npm_postversion' for more details 
+    //shell.exec(`npm version ${newVersion}`);
+
+    // Push the latest commits and related tags to remote server
+    //shell.exec(`git push --follow-tags`);
+    
 }

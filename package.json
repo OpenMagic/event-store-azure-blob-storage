@@ -3,8 +3,11 @@
   "version": "0.3.0-0",
   "description": ".NET Event Store using Azure Blob storage",
   "scripts": {
-    "publish": "echo Use publish.cmd or node tasks publish && exit 1",
     "postinstall": "node tasks postinstall",
+    "publish": "echo Use publish.cmd or node tasks publish && exit 1",
+    "preversion": "node tasks preversion",
+    "version": "node tasks version",
+    "postversion": "node tasks postversion",
     "test": "node tasks test"
   },
   "repository": {
@@ -18,6 +21,7 @@
   },
   "homepage": "https://github.com/OpenMagic/event-store-azure-blob-storage#readme",
   "devDependencies": {
+    "is-git-clean": "^1.0.0",
     "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v3.0.3",
     "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v3.1.3",
     "shelljs": "^0.7.0"
