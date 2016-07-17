@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/OpenMagic/event-store-azure-blob-storage#readme",
   "devDependencies": {
+    "git-rev-sync": "^1.6.0",
     "is-git-clean": "^1.0.0",
     "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v3.0.3",
     "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v3.1.3",

@@ -21,6 +21,7 @@ const config = {
 
 require('shelljs/make');
 
+const git = require('git-rev-sync');
 const isGitClean = require('is-git-clean');
 const mkdirp = require('mkdirp');
 const msbuild = require('npm-msbuild');
@@ -59,11 +60,21 @@ target.postinstall = function () {
 // Publish the package
 target.publish = function (args) {
     runningTask('publish');
+    
     validateGitIsClean();
+
     const newVersion = getNewVersionArgument();
+    const currentBranch = git.branch();
+
+    createPublishBranch();
     updateVersion(newVersion);
     createPackage();
+    mergePublishBranch(currentBranch);
+
+    // Push the latest commits and related tags to remote server
+    //shell.exec(`git push --follow-tags`);
     pushRepository();
+
     completedTask('publish');
 }
 
@@ -98,6 +109,20 @@ function runningTask(name) {
     console.log();
 }
 
+// Update the version number
+function updateVersion (newVersion) {
+
+
+    // npm version will:
+    //      - Run tests
+    //      - Update version number in package.json and Constants.cs
+    //      - Stage the version number changes to the Git repository
+    //      - Create the nuget package
+    //       
+    // See tasks 'npm_preversion, npm_version, npm_postversion' for more details 
+    //shell.exec(`npm version ${newVersion}`);   
+}
+
 // Write how to use publish command 
 function writePublishUsage() {
     console.log();
@@ -115,22 +140,4 @@ function validateGitIsClean() {
     }
     console.log('Git repository must be clean before running the requested task.')
     process.exit(1);    
-}
-
-// Update the version number
-function version (newVersion) {
-
-
-    // npm version will:
-    //      - Run tests
-    //      - Update version number in package.json and Constants.cs
-    //      - Stage the version number changes to the Git repository
-    //      - Create the nuget package
-    //       
-    // See tasks 'npm_preversion, npm_version, npm_postversion' for more details 
-    //shell.exec(`npm version ${newVersion}`);
-
-    // Push the latest commits and related tags to remote server
-    //shell.exec(`git push --follow-tags`);
-    
 }
