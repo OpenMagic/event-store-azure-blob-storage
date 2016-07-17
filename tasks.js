@@ -96,7 +96,7 @@ function deleteGitBranchIfExists(branchName) {
     if (shell.exec(`git show-ref --verify --quiet refs/heads/${branchName}`).code !== 0){
         return;
     }
-    console.log(`Deleting branch '${branchName}`);
+    console.log(`Deleting branch '${branchName}'`);
     shell.exec(`git branch -d ${branchName}`);
 }
 
