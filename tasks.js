@@ -60,10 +60,10 @@ target.postinstall = function () {
 // Publish the package
 target.publish = function (args) {
     runningTask('publish');
-    
+
     validateGitIsClean();
 
-    const newVersion = getNewVersionArgument();
+    const newVersion = getNewVersionArgument(args);
     const currentBranch = git.branch();
 
     createPublishBranch();
