@@ -8,11 +8,11 @@
 1. Clone your fork: `git clone https://github.com/<your-github-name>/event-store-azure-blob-storage`
 1. Prerequisites:
     - [node.js](https://nodejs.org/en/)
-    - npm >= 3.10 `npm install npm -g`
-1. Install dependencies:
-    - `npm install`
-    - `npm install --global gulpjs/gulp-cli`
+    - npm >= 3.10 `npm install npm --global`
+    - gulp >= 4.0 `npm install gulpjs/gulp-cli --global`
+1. Install dependencies: `npm install`
 1. Build & test: `gulp test`
+
 1. Fix configuration until all tests pass.
 1. Create a feature branch: `git checkout -b new-feature`
 1. Create tests & implement feature. Ensure all tests pass: `build`
