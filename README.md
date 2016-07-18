@@ -10,6 +10,7 @@
     - [node.js](https://nodejs.org/en/)
     - npm >= 3.10 `npm install npm --global`
     - gulp >= 4.0 `npm install gulpjs/gulp-cli --global`
+    - typings >= 1.3 `npm install typings --global`
 1. Install dependencies: `npm install`
 1. Build & test: `gulp test`
 
