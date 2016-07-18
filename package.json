@@ -3,12 +3,14 @@
   "version": "0.3.0-0",
   "description": ".NET Event Store using Azure Blob storage",
   "scripts": {
-    "postinstall": "node tasks postinstall",
-    "publish": "echo Use publish.cmd or node tasks publish && exit 1",
-    "preversion": "node tasks preversion",
-    "version": "node tasks version",
-    "postversion": "node tasks postversion",
-    "test": "node tasks test"
+    "prebuild": "npm run clean",
+    "build": "node scripts/build",
+    "clean": "node scripts/clean",
+    "deploy": "node scripts/deploy",
+    "publish": "echo Use npm run deploy && exit 1",
+    "version": "node scripts/version",
+    "pretest": "npm run build",
+    "test": "node scripts/test"
   },
   "repository": {
     "type": "git",

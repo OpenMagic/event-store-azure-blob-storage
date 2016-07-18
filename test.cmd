@@ -1,3 +1,3 @@
 @echo off
-rem Run all tests 
+rem Build & test the application 
 call npm test
