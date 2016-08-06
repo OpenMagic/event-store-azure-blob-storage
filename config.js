@@ -1,7 +1,9 @@
-module.exports = function() {
-    const config = {
-        artifacts: './artifacts'
-    };
+const config = {
+    clean: {
+        directories: [
+            './artifacts'
+        ]
+    }
+};
 
-    return config;
-}
+module.exports = config;

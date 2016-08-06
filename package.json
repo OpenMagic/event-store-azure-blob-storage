@@ -22,6 +22,7 @@
     "gulp-shell": "^0.5.2",
     "gulp-task-listing": "^1.0.1",
     "gulp-tsc": "^1.2.0",
+    "gulplog": "^1.0.0",
     "is-git-clean": "^1.0.0",
     "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v3.0.3",
     "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v3.1.3",
