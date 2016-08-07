@@ -1,8 +1,11 @@
 const config = {
     clean: {
         directories: [
-            './artifacts',
-            './**/obj/Release/**/*'
+            'artifacts',
+            'source/**/bin/Release',
+            'source/**/obj/Release',
+            'tests/**/bin/Release',
+            'tests/**/obj/Release'
         ]
     }
 };
