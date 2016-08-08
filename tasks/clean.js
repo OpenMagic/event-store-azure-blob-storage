@@ -1,9 +1,9 @@
-var config = require('../config');
-var del = require('del');
-var log = require('gulplog');
-var quote = require('../scripts/quote');
+const config = require('../config');
+const del = require('del');
+const log = require('gulplog');
+const quote = require('../scripts/quote');
 
-module.exports = function() {
-  log.info(`Deleting '${quote(config.clean.directories)}'`);
-  return del(config.clean.directories);
+module.exports = function clean() {
+    log.info(`Deleting '${quote(config.clean.directories)}'`);
+    return del(config.clean.directories);
 }

@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
     clean: {
         directories: [
             'artifacts',
@@ -7,7 +7,9 @@ const config = {
             'tests/**/bin/Release',
             'tests/**/obj/Release'
         ]
+    },
+    msbuild: {
+        configuration: 'Release',
+        verbosity: 'Minimal'
     }
 };
-
-module.exports = config;
