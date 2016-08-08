@@ -3,7 +3,7 @@
   "version": "0.3.0-0",
   "description": ".NET Event Store using Azure Blob storage",
   "scripts": {
-    "postinstall": "typings install"
+    "postinstall": "typings install && node ./scripts/npm-postinstall.js"
   },
   "repository": {
     "type": "git",
