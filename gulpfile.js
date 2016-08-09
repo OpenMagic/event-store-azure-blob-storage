@@ -9,10 +9,6 @@ gulp.task('build', ['compile']);
 gulp.task('clean', clean);
 gulp.task('compile', ['clean'], compile);
 
-function clean() {
-    log.info(`Deleting '${quote(config.clean.directories)}'`);
-    return del(config.clean.directories);
-}
 
 function compile(cb) {
     log.info(`Compiling solution...`);
