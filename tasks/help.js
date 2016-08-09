@@ -1,1 +1,0 @@
-module.exports = require('gulp-task-listing');
