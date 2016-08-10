@@ -1,3 +1,7 @@
+# todo
+
+shell.exec return code
+
 # event-store-azure-blob-storage
 
 .NET Event Store using Azure Blob storage

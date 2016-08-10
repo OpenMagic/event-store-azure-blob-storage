@@ -53,14 +53,6 @@ target.publish = function (args) {
     completedTask('publish');
 }
 
-// Run all tests
-target.test = function (args) {
-    target.compile();
-    runningTask('test');
-    shell.exec(`${config.xunit.cmd} ${config.xunit.assemblies}`);
-    completedTask('test');
-}
-
 function createAndCheckoutGitBranch(branchName) {
     console.log(`Creating branch '${branchName}'`);
     shell.exec(`git checkout -b ${branchName}`);
