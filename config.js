@@ -1,16 +1,16 @@
 var path = require('path');
 
+const artifactsDirectory = 'artifacts';
 const msbuild = {
     configuration: 'Release',
     verbosity: 'Minimal'
 };
 
-const testsDirectory = path.join(__dirname, 'tests');
-
 const config = {
+    artifacts: artifactsDirectory,
     clean: {
         directories: [
-            'artifacts',
+            artifactsDirectory,
             `source/**/bin/${msbuild.configuration}`,
             `source/**/obj/${msbuild.configuration}`,
             `tests/**/bin/${msbuild.configuration}`,
@@ -18,12 +18,18 @@ const config = {
         ]
     },
     msbuild: msbuild,
+    nuget: {
+        nuspecs: [
+            '*.nuspec'
+        ]
+    },
     specflow: {
         cmd: `${__dirname}/packages/SpecFlow.2.1.0/tools/specflow.exe`,
         projects: [
             'tests/**/*.Specifications.csproj'
         ]
     },
+    versions: require('./scripts/versions'),
     xunit: {
         cmd: `${__dirname}/packages/xunit.runner.console/tools/xunit.console.exe`,
         assemblies: [

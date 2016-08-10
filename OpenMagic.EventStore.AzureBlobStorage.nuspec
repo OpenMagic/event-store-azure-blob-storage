@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>OpenMagic.EventStore.AzureBlobStorage</id>
+    <version>$version$</version>
+    <authors>Tim Murphy</authors>
+    <owners>Tim Murphy</owners>
+    <licenseUrl>https://raw.githubusercontent.com/OpenMagic/event-store-azure-blob-storage/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/OpenMagic/event-store-azure-blob-storage</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.NET Event Store using Azure Blob storage</description>
+    <releaseNotes>See https://github.com/OpenMagic/event-store-azure-blob-storage/commits/master</releaseNotes>
+    <copyright>Copyright (c) 2016 Tim Murphy</copyright>
+    <tags>eventstore azure blob event store</tags>
+    <dependencies></dependencies>
+  </metadata>
+  <files>
+    <file src="source\OpenMagic.EventStore.AzureBlobStorage\bin\Release\OpenMagic.EventStore.AzureBlobStorage.dll" target="lib\net461" />
+    <file src="source\OpenMagic.EventStore.AzureBlobStorage\bin\Release\OpenMagic.EventStore.AzureBlobStorage.pdb" target="lib\net461" />
+    <file src="source\OpenMagic.EventStore.AzureBlobStorage\**\*.cs" target="src" />
+  </files>
+</package>

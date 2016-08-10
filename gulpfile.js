@@ -4,7 +4,9 @@ const plugins = {
     del: require('del'),
     glob: require('glob'),
     log: require('gulplog'),
+    mkdirp: require('mkdirp'),
     msbuild: require('npm-msbuild'),
+    nuget: require('npm-nuget'),
     quote: require('./scripts/quote'),
     shell: require('shelljs')
 }
