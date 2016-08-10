@@ -6,7 +6,7 @@
     "isShellCommand": true,
     "tasks": [
         {
-            "taskName": "compile",
+            "taskName": "build",
             "args": [],
             "isBuildCommand": true,
             "isWatching": false,

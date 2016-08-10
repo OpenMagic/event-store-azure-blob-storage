@@ -1,4 +1,3 @@
-var files = require('./scripts/files');
 var path = require('path');
 
 const msbuild = {
@@ -12,10 +11,10 @@ const config = {
     clean: {
         directories: [
             'artifacts',
-            `source/**/bin/${msbuild.configurations}`,
-            `source/**/obj/${msbuild.configurations}`,
-            `tests/**/bin/${msbuild.configurations}`,
-            `tests/**/obj/${msbuild.configurations}`
+            `source/**/bin/${msbuild.configuration}`,
+            `source/**/obj/${msbuild.configuration}`,
+            `tests/**/bin/${msbuild.configuration}`,
+            `tests/**/obj/${msbuild.configuration}`
         ]
     },
     msbuild: msbuild,
@@ -27,9 +26,9 @@ const config = {
     },
     xunit: {
         cmd: `${__dirname}/packages/xunit.runner.console/tools/xunit.console.exe`,
-        assemblies: files[
-            `tests/**/bin/${msbuild.configurations}/*.Specifications.dll`,
-            `tests/**/bin/${msbuild.configurations}/*.Tests.dll`
+        assemblies: [
+            `tests/**/bin/${msbuild.configuration}/*.Specifications.dll`,
+            `tests/**/bin/${msbuild.configuration}/*.Tests.dll`
         ]
     }
 };
