@@ -18,6 +18,8 @@
   "devDependencies": {
     "del": "^2.2.1",
     "git-rev-sync": "^1.6.0",
+    "glob": "^7.0.5",
+    "glob-fs": "^0.1.6",
     "gulp": "^3.9.1",
     "gulp-task-listing": "^1.0.1",
     "gulp-tsc": "^1.2.0",

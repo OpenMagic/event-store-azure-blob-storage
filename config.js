@@ -12,20 +12,25 @@ const config = {
     clean: {
         directories: [
             'artifacts',
-            'source/**/bin/Release',
-            'source/**/obj/Release',
-            'tests/**/bin/Release',
-            'tests/**/obj/Release'
+            `source/**/bin/${msbuild.configurations}`,
+            `source/**/obj/${msbuild.configurations}`,
+            `tests/**/bin/${msbuild.configurations}`,
+            `tests/**/obj/${msbuild.configurations}`
         ]
     },
     msbuild: msbuild,
     specflow: {
         cmd: `${__dirname}/packages/SpecFlow.2.1.0/tools/specflow.exe`,
-        projects: files.getSpecFlowProjects(testsDirectory)
+        projects: [
+            'tests/**/*.Specifications.csproj'
+        ]
     },
     xunit: {
         cmd: `${__dirname}/packages/xunit.runner.console/tools/xunit.console.exe`,
-        assemblies: files.getTestAssemblies(testsDirectory, msbuild.configuration)
+        assemblies: files[
+            `tests/**/bin/${msbuild.configurations}/*.Specifications.dll`,
+            `tests/**/bin/${msbuild.configurations}/*.Tests.dll`
+        ]
     }
 };
 
