@@ -12,6 +12,6 @@ const plugins = {
 // Load gulp tasks in ./tasks directory
 require('load-gulp-tasks')(gulp, options, plugins);
 
-gulp.task('build', ['test']);
+gulp.task('build', ['package']);
 gulp.task('default', ['help']);
 gulp.task('help', require('gulp-task-listing'));
