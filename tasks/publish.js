@@ -21,6 +21,11 @@ module.exports = function (gulp, config, $) {
         return cb();
     });
 
+    function createAndCheckoutGitBranch(branchName) {
+        $.log.info(`Creating branch '${$.quote(branchName)}'`);
+        shell.exec(`git checkout -b ${branchName}`);
+    }
+
     function deleteGitBranchIfExists(branchName) {
         if ($.shell.exec(`git show-ref --verify --quiet refs/heads/${branchName}`).code !== 0) {
             return;
