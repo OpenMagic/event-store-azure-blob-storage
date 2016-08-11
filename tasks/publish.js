@@ -4,7 +4,7 @@ module.exports = function (gulp, config, $) {
     gulp.task('publish', function publish(cb) {
         validateGitIsClean();
 
-        const newVersion = getNewVersionArgument(args);
+        const newVersion = getNewVersionArgument($);
         const currentBranch = git.branch();
 
         deleteGitBranchIfExists('publish')
@@ -19,12 +19,13 @@ module.exports = function (gulp, config, $) {
 
         return cb();
     });
+
+    // Check git repository is clean. Throws exception if it isn't.
+    function validateGitIsClean() {
+        if (isGitClean.sync()) {
+            return;
+        }
+        throw 'Git repository must be clean before running the requested task.';
+    }
 };
 
-// Check git repository is clean. Throws exception if it isn't.
-function validateGitIsClean() {
-    if (isGitClean.sync()) {
-        return;
-    }
-    throw 'Git repository must be clean before running the requested task.';
-}
