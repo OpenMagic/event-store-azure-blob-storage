@@ -1,12 +1,10 @@
 module.exports = function (gulp, config, $) {
-    gulp.task('package', ['test'], function package(cb) {
-
-        throw 'todo: copy bin to artifacts'
+    gulp.task('package', $.dependencies(['test']), function package(cb) {
 
         $.log.info(`Creating NuGet packages for '${$.quote(config.nuget.nuspecs)}'`);
 
         $.mkdirp.sync(config.artifacts);
-        
+
         config.nuget.nuspecs.forEach(function (nuspecPattern) {
             $.log.info(`Creating NuGet packages for '${$.quote(nuspecPattern)}'`);
 
@@ -14,7 +12,7 @@ module.exports = function (gulp, config, $) {
 
             nuspecs.forEach(function (nuspec) {
                 $.log.info(`Creating NuGet package for '${$.quote(nuspec)}'`);
-                $.nuget.exec(`pack ${nuspec} -OutputDirectory ${config.artifacts} -Version ${config.versions.getNuGetVersion()} -Symbols`);
+                $.nuget.exec(`pack ${nuspec} -OutputDirectory ${config.artifacts} -Version ${$.versions.getNuGetVersion()} -Symbols -Properties "Configuration=${config.msbuild.configuration}"`);
             });
         });
 

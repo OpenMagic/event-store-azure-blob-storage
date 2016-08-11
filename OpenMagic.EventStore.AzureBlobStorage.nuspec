@@ -15,8 +15,8 @@
     <dependencies></dependencies>
   </metadata>
   <files>
-    <file src="source\OpenMagic.EventStore.AzureBlobStorage\bin\Release\OpenMagic.EventStore.AzureBlobStorage.dll" target="lib\net461" />
-    <file src="source\OpenMagic.EventStore.AzureBlobStorage\bin\Release\OpenMagic.EventStore.AzureBlobStorage.pdb" target="lib\net461" />
+    <file src="source\OpenMagic.EventStore.AzureBlobStorage\bin\$configuration$\OpenMagic.EventStore.AzureBlobStorage.dll" target="lib\net461" />
+    <file src="source\OpenMagic.EventStore.AzureBlobStorage\bin\$configuration$\OpenMagic.EventStore.AzureBlobStorage.pdb" target="lib\net461" />
     <file src="source\OpenMagic.EventStore.AzureBlobStorage\**\*.cs" target="src" />
   </files>
 </package>

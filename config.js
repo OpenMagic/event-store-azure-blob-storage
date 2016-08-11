@@ -29,7 +29,6 @@ const config = {
             'tests/**/*.Specifications.csproj'
         ]
     },
-    versions: require('./scripts/versions'),
     xunit: {
         cmd: `${__dirname}/packages/xunit.runner.console/tools/xunit.console.exe`,
         assemblies: [
