@@ -34,7 +34,8 @@ const config = {
         assemblies: [
             `tests/**/bin/${msbuild.configuration}/*.Specifications.dll`,
             `tests/**/bin/${msbuild.configuration}/*.Tests.dll`
-        ]
+        ],
+        version: "2.1"
     }
 };
 

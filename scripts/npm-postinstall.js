@@ -35,7 +35,7 @@ function restoreNuGetPackages() {
     starting(task);
 
     nuget.exec(`restore`);
-    nuget.exec(`install xunit.runner.console -OutputDirectory ./packages -ExcludeVersion -Version 2.1`);
+    nuget.exec(`install xunit.runner.console -OutputDirectory ./packages -ExcludeVersion -Version ${config.xunit.version}`);
 
     finished(task);
 }
