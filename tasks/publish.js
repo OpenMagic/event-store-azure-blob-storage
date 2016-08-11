@@ -1,13 +1,14 @@
+const git = require('git-rev-sync');
 const isGitClean = require('is-git-clean');
 
 module.exports = function (gulp, config, $) {
     gulp.task('publish', function publish(cb) {
         validateGitIsClean();
 
-        const newVersion = getNewVersionArgument($);
+        const bump = config.argv.bump;
         const currentBranch = git.branch();
 
-        deleteGitBranchIfExists('publish')
+        deleteGitBranchIfExists('publish', $)
         createAndCheckoutGitBranch('publish');
         updateVersion(newVersion);
         createPackage();
@@ -19,13 +20,20 @@ module.exports = function (gulp, config, $) {
 
         return cb();
     });
-
-    // Check git repository is clean. Throws exception if it isn't.
-    function validateGitIsClean() {
-        if (isGitClean.sync()) {
-            return;
-        }
-        throw 'Git repository must be clean before running the requested task.';
-    }
 };
 
+function deleteGitBranchIfExists(branchName, $) {
+    if ($.shell.exec(`git show-ref --verify --quiet refs/heads/${branchName}`).code !== 0){
+        return;
+    }
+    $.log.info(`Deleting branch '${$.quote(branchName)}'`);
+    $.shell.exec(`git branch -d ${branchName}`);
+}
+
+// Check git repository is clean. Throws exception if it isn't.
+function validateGitIsClean() {
+    if (isGitClean.sync()) {
+        return;
+    }
+    throw 'Git repository must be clean before running the requested task.';
+}
