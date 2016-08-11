@@ -6,7 +6,9 @@ module.exports = function (gulp, config, $) {
         $.mkdirp.sync(config.artifacts);
 
         config.nuget.nuspecs.forEach(function (nuspecPattern) {
-            $.log.info(`Creating NuGet packages for '${$.quote(nuspecPattern)}'`);
+            if (config.nuget.nuspecs.length > 1) {
+                $.log.info(`Creating NuGet packages for '${$.quote(nuspecPattern)}'`);
+            }
 
             const nuspecs = $.glob.sync(nuspecPattern);
 
