@@ -1,5 +1,8 @@
 module.exports = function (gulp, config, $) {
     gulp.task('package', ['test'], function package(cb) {
+
+        throw 'todo: copy bin to artifacts'
+
         $.log.info(`Creating NuGet packages for '${$.quote(config.nuget.nuspecs)}'`);
 
         $.mkdirp.sync(config.artifacts);
