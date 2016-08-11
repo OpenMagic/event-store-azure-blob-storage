@@ -1,5 +1,5 @@
 module.exports = function (gulp, config, $) {
-    gulp.task('compile', function compile(cb) {
+    gulp.task('compile', $.dependencies(['clean']), function compile(cb) {
         $.log.info(`Compiling solution...`);
         console.log();
 

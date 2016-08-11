@@ -1,5 +1,5 @@
 module.exports = function (gulp, config, $) {
-    gulp.task('test', ['compile'], function test(cb) {
+    gulp.task('test', $.dependencies(['compile']), function test(cb) {
         $.log.info(`Running tests for '${$.quote(config.xunit.assemblies)}'`);
 
         config.xunit.assemblies.forEach(function (assemblyPattern) {
