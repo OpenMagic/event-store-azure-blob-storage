@@ -43,9 +43,12 @@ module.exports = function (gulp, config, $) {
         shell.exec(`npm version ${newVersion}`);
     }
 
-    function validateBump() {
-        
-        throw `Usage: gulp publish --bump <level>\n\n    where <level> is one of:\n        major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`;
+    function validateBump(level) {
+        const levels = 'major, minor, patch, premajor, preminor, prepatch, prerelease';
+
+        if (levels.split(', ').indexOf(level) < 0) {
+            throw `Usage: gulp publish --bump <level>\n\n    where <level> is one of:\n        ${levels}`;
+        }
     }
 
     // Check git repository is clean. Throws exception if it isn't.
