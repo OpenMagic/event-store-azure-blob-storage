@@ -8,7 +8,7 @@
             public const string FileVersion = Version;
             public const string Product = "OpenMagic.EventStore.AzureBlobStorage";
             public const string Title = Product;
-            public const string Version = "0.0.0.0";
+            public const string Version = "0.3.0.0";
         }
     }
 }
