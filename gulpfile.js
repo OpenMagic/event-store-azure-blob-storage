@@ -3,7 +3,7 @@ const options = require('./config');
 const plugins = {
     del: require('del'),
     dependencies: dependencies,
-    glob: require('glob'),
+    glob: require('globby'),
     log: require('gulplog'),
     mkdirp: require('mkdirp'),
     msbuild: require('npm-msbuild'),
