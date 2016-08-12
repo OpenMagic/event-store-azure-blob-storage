@@ -1,6 +1,6 @@
 {
   "name": "event-store-azure-blob-storage",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": ".NET Event Store using Azure Blob storage",
   "scripts": {
     "prepublish": "echo Use gulp publish && exit 1",
