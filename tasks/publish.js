@@ -5,20 +5,21 @@ module.exports = function (gulp, config, $) {
     gulp.task('publish', function publish(cb) {
         validateGitIsClean();
 
-        const bump = config.argv.bump;
-        const currentBranch = git.branch();
+        throw 'todo';
+        // const bump = config.argv.bump;
+        // const currentBranch = git.branch();
 
-        deleteGitBranchIfExists('publish')
-        createAndCheckoutGitBranch('publish');
-        updateVersion(newVersion);
-        createPackage();
-        mergePublishBranch(currentBranch);
+        // deleteGitBranchIfExists('publish')
+        // createAndCheckoutGitBranch('publish');
+        // updateVersion(newVersion);
+        // createPackage();
+        // mergePublishBranch(currentBranch);
 
-        // Push the latest commits and related tags to remote server
-        //shell.exec(`git push --follow-tags`);
-        pushRepository();
+        // // Push the latest commits and related tags to remote server
+        // //shell.exec(`git push --follow-tags`);
+        // pushRepository();
 
-        return cb();
+        // return cb();
     });
 
     function createAndCheckoutGitBranch(branchName) {
