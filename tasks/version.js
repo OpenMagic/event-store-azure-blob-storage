@@ -2,6 +2,7 @@ module.exports = function (gulp, config, $) {
     gulp.task('version', function version(cb) {
         $.log.info(`version: ${process.env.npm_package_version}`)
         $.shell.exec('npm version patch');
+        cb();
     });
 
     gulp.task('version-npm-preversion', function version_npm_preversion(cb) {
