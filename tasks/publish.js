@@ -9,25 +9,37 @@ module.exports = function (gulp, config, $) {
 
         validateBump(bump);
 
-        throw 'todo';
-        // const currentBranch = git.branch();
+        const currentBranch = createAndCheckoutPublishBranch()
 
-        // deleteGitBranchIfExists('publish')
-        // createAndCheckoutGitBranch('publish');
-        // updateVersion(newVersion);
-        // createPackage();
-        // mergePublishBranch(currentBranch);
+        try {
+            updateVersion(bump);
 
-        // // Push the latest commits and related tags to remote server
-        // //shell.exec(`git push --follow-tags`);
-        // pushRepository();
-
-        // return cb();
+            try {
+                createPackage();
+                mergePublishBranch(currentBranch);
+                pushRepository();
+            }
+            catch (err) {
+                rollbackTag();
+            }
+        }
+        catch (err) {
+            rollbackPublishBranch();
+        }
+        return cb();
     });
 
     function createAndCheckoutGitBranch(branchName) {
         $.log.info(`Creating branch '${$.quote(branchName)}'`);
         $.shell.exec(`git checkout -b ${branchName}`);
+    }
+
+    function createAndCheckoutPublishBranch() {
+        throw 'todo';
+        // const currentBranch = git.branch();
+
+        // deleteGitBranchIfExists('publish')
+        // createAndCheckoutGitBranch('publish');
     }
 
     function deleteGitBranchIfExists(branchName) {
