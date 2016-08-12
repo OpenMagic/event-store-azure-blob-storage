@@ -1,4 +1,8 @@
 module.exports = function (gulp, config, $) {
+    gulp.task('version', function publish(cb) {
+        $.log.info(`version: ${env.process.npm_package_version}`)
+    });
+
     gulp.task('version-npm-preversion', function publish(cb) {
         $.log.info(`preversion: ${env.process.npm_package_version}`)
     });
