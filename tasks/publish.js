@@ -5,8 +5,11 @@ module.exports = function (gulp, config, $) {
     gulp.task('publish', function publish(cb) {
         validateGitIsClean();
 
+        const bump = config.argv.bump;
+
+        console.log(`bump: ${bump}`);
+        
         throw 'todo';
-        // const bump = config.argv.bump;
         // const currentBranch = git.branch();
 
         // deleteGitBranchIfExists('publish')
