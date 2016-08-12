@@ -44,7 +44,8 @@ module.exports = function (gulp, config, $) {
     }
 
     function validateBump() {
-        writePublishUsage();
+        
+        throw `Usage: gulp publish --bump <level>\n\n    where <level> is one of:\n        major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`;
     }
 
     // Check git repository is clean. Throws exception if it isn't.
@@ -53,16 +54,5 @@ module.exports = function (gulp, config, $) {
             return;
         }
         throw 'Git repository must be clean before running the requested task.';
-    }
-
-    function writePublishUsage() {
-        throw `Usage: gulp publish <newversion>\n\n    where <newversion> is one of:\n        major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`;
-
-        console.log();
-        console.log(`Usage: gulp publish <newversion>`);
-        console.log();
-        console.log(`where <newversion> is one of:`);
-        console.log(`    major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`);
-        console.log();
     }
 };
