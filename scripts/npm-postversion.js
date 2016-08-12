@@ -35,19 +35,6 @@ function updateConstants() {
         silent: true,
     });
 
-    // const constants = glob.sync(config.constants);
-    // console.log(`constants ${constants}`);
-    // constants.forEach(function (constant) {
-    //     console.log(`Updating assembly version in '${quote(constant)}'`);
-    //     replace({
-    //         regex: /public const string Version = \"\d+\.\d+\.\d+\.\d\";/,
-    //         replacement: `public const string Version = \"${version}\";`,
-    //         paths: constant,
-    //         recursive: true,
-    //         silent: false,
-    //     });
-    // });
-
     finished(task);
 }
 
