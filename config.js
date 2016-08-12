@@ -17,6 +17,9 @@ const config = {
             `tests/**/obj/${msbuild.configuration}`
         ]
     },
+    constants: [
+        'source/**/Constants.cs'
+    ],
     msbuild: msbuild,
     nuget: {
         nuspecs: [

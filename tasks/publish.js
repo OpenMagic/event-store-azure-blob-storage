@@ -34,6 +34,11 @@ module.exports = function (gulp, config, $) {
         $.shell.exec(`git branch -d ${branchName}`);
     }
 
+    // Update the version number
+    function updateVersion(newVersion) {
+        shell.exec(`npm version ${newVersion}`);   
+    }
+
     // Check git repository is clean. Throws exception if it isn't.
     function validateGitIsClean() {
         if (isGitClean.sync()) {
