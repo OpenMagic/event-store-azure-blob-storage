@@ -46,7 +46,7 @@ module.exports = function (gulp, config, $) {
     function validateBump() {
         writePublishUsage();
     }
-    
+
     // Check git repository is clean. Throws exception if it isn't.
     function validateGitIsClean() {
         if (isGitClean.sync()) {
@@ -56,8 +56,10 @@ module.exports = function (gulp, config, $) {
     }
 
     function writePublishUsage() {
+        throw `Usage: gulp publish <newversion>\n\nwhere <newversion> is one of:\n    major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`;
+
         console.log();
-        console.log(`Usage: publish <newversion> or run-task publish <newversion> or node tasks publish <newversion>`);
+        console.log(`Usage: gulp publish <newversion>`);
         console.log();
         console.log(`where <newversion> is one of:`);
         console.log(`    major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`);
