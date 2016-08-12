@@ -56,7 +56,7 @@ module.exports = function (gulp, config, $) {
     }
 
     function writePublishUsage() {
-        throw `Usage: gulp publish <newversion>\n\nwhere <newversion> is one of:\n    major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`;
+        throw `Usage: gulp publish <newversion>\n\n    where <newversion> is one of:\n        major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`;
 
         console.log();
         console.log(`Usage: gulp publish <newversion>`);
