@@ -7,8 +7,8 @@ module.exports = function (gulp, config, $) {
 
         const bump = config.argv.bump;
 
-        console.log(`bump: ${bump}`);
-        
+        validateBump(bump);
+
         throw 'todo';
         // const currentBranch = git.branch();
 
@@ -40,9 +40,13 @@ module.exports = function (gulp, config, $) {
 
     // Update the version number
     function updateVersion(newVersion) {
-        shell.exec(`npm version ${newVersion}`);   
+        shell.exec(`npm version ${newVersion}`);
     }
 
+    function validateBump() {
+        writePublishUsage();
+    }
+    
     // Check git repository is clean. Throws exception if it isn't.
     function validateGitIsClean() {
         if (isGitClean.sync()) {
@@ -50,5 +54,13 @@ module.exports = function (gulp, config, $) {
         }
         throw 'Git repository must be clean before running the requested task.';
     }
-};
 
+    function writePublishUsage() {
+        console.log();
+        console.log(`Usage: publish <newversion> or run-task publish <newversion> or node tasks publish <newversion>`);
+        console.log();
+        console.log(`where <newversion> is one of:`);
+        console.log(`    major, minor, patch, premajor, preminor, prepatch, prerelease, from-git`);
+        console.log();
+    }
+};
