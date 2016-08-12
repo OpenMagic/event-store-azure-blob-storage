@@ -5,6 +5,7 @@ module.exports = function (gulp, config, $) {
     });
 
     gulp.task('version-npm-preversion', function version_npm_preversion(cb) {
+        console.log(`npm-preversion: ${process.env.npm_package_version}`)
         $.log.info(`npm-preversion: ${process.env.npm_package_version}`)
         cb();
     });
