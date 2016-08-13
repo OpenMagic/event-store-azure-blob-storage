@@ -5,9 +5,7 @@
   "scripts": {
     "prepublish": "echo Use gulp publish && exit 1",
     "postinstall": "typings install && node ./scripts/npm-postinstall.js",
-    "preversion": "gulp version-npm-preversion",
-    "version": "gulp version-npm-version",
-    "postversion": "gulp version-npm-postversion",
+    "preversion": "echo Use gulp publish && exit 1",
     "test": "gulp test"
   },
   "repository": {
