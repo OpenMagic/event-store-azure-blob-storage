@@ -1,5 +1,5 @@
 module.exports = function (gulp, config, $) {
-    gulp.task('package', $.dependencies(['test']), function package(cb) {
+    gulp.task('build-package', $.dependencies(['test']), function package(cb) {
 
         $.log.info(`Creating NuGet packages for '${$.quote(config.nuget.nuspecs)}'`);
 

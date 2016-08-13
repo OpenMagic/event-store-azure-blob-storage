@@ -26,6 +26,7 @@ const config = {
             '*.nuspec'
         ]
     },
+    pattern: ['tasks/*.js'],
     specflow: {
         cmd: `${__dirname}/packages/SpecFlow.2.1.0/tools/specflow.exe`,
         projects: [
