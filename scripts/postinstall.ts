@@ -3,8 +3,8 @@
 /// <reference path="../typings/index.d.ts" />
 
 import { config } from "../config";
+import { log } from "./log";
 
-const taskOperation = require('chalk').cyan;
 const glob = require('glob');
 const nuget = require('npm-nuget');
 const path = require('path');
@@ -14,7 +14,7 @@ const shell = require('shelljs');
 function createSpecFlowUnitTestClasses() {
     const task = 'generate unit test classes for all SpecFlow projects'
 
-    starting(task);
+    log.startingTask(task);
 
     config.specflow.projects.forEach(function (projectsPattern) {
         console.log(`Generating unit test classes for SpecFlow '${quote(projectsPattern)}'...`);
@@ -25,26 +25,18 @@ function createSpecFlowUnitTestClasses() {
         })
     });
 
-    finished(task);
-}
-
-function finished(message) {
-    console.log(`Finished '${taskOperation(message)}'.`);
+    log.finishedTask(task);
 }
 
 function restoreNuGetPackages() {
     const task = 'restore NuGet packages';
 
-    starting(task);
+    log.startingTask(task);
 
     nuget.exec(`restore`);
     nuget.exec(`install xunit.runner.console -OutputDirectory ./packages -ExcludeVersion -Version ${config.xunit.version}`);
 
-    finished(task);
-}
-
-function starting(message) {
-    console.log(`Starting '${taskOperation(message)}'...`);
+    log.finishedTask(task);
 }
 
 restoreNuGetPackages();
