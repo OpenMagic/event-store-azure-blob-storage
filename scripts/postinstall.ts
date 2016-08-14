@@ -3,12 +3,12 @@
 /// <reference path="../typings/index.d.ts" />
 
 import { config } from "../config";
-import { log } from "./log";
+import { log } from "./library/log";
+import * as shell from "./library/shell";
 import * as globby from "globby";
 import * as path from 'path';
 
 const nuget = require('npm-nuget');
-const shell = require('shelljs');
 
 function createSpecFlowUnitTestClasses() {
     const task = 'generate unit test classes for all SpecFlow projects'
@@ -19,8 +19,12 @@ function createSpecFlowUnitTestClasses() {
 
     const projects = globby.sync(config.specflow.projects);
     projects.forEach(function (project) {
-        console.log(`Generating unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`);
-        shell.exec(`${config.specflow.cmd} generateall ${project}`);
+        shell.exec(
+            `${config.specflow.cmd} generateall ${project}`,
+            `Generating unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`,
+            `Successfully generated unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`,
+            `Failed to generate unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`            
+        );
     });
 
     log.finishedTask(task);

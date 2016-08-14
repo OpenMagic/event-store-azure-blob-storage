@@ -1,7 +1,8 @@
 {
   "globalDevDependencies": {
     "node": "registry:dt/node#6.0.0+20160807145350",
-    "require": "registry:dt/require#2.1.20+20160316155526"
+    "require": "registry:dt/require#2.1.20+20160316155526",
+    "shelljs": "registry:dt/shelljs#0.0.0+20160526131156"
   },
   "devDependencies": {
     "chalk": "registry:npm/chalk#1.1.1+20160812215109",
