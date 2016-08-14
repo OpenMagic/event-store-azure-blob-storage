@@ -5,9 +5,9 @@
 import { config } from "../config";
 import { log } from "./log";
 import * as globby from "globby";
+import * as path from 'path';
 
 const nuget = require('npm-nuget');
-const path = require('path');
 const quote = require('./quote');
 const shell = require('shelljs');
 
