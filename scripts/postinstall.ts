@@ -11,6 +11,13 @@ import * as shell from "./library/shell";
 // todo: create typings
 const nuget = require("npm-nuget");
 
+main();
+
+function main() {
+    restoreNuGetPackages();
+    createSpecFlowUnitTestClasses();
+}
+
 function createSpecFlowUnitTestClasses() {
     const task = "generate unit test classes for all SpecFlow projects"
 
@@ -24,7 +31,7 @@ function createSpecFlowUnitTestClasses() {
             `${config.specflow.cmd} generateall ${project}`,
             `Generating unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`,
             `Successfully generated unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`,
-            `Failed to generate unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`            
+            `Failed to generate unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`
         );
     });
 
@@ -41,6 +48,3 @@ function restoreNuGetPackages() {
 
     log.finishedTask(task);
 }
-
-restoreNuGetPackages();
-createSpecFlowUnitTestClasses();
