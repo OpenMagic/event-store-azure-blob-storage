@@ -8,7 +8,6 @@ import * as globby from "globby";
 import * as path from 'path';
 
 const nuget = require('npm-nuget');
-const quote = require('./quote');
 const shell = require('shelljs');
 
 function createSpecFlowUnitTestClasses() {
@@ -16,11 +15,11 @@ function createSpecFlowUnitTestClasses() {
 
     log.startingTask(task);
 
-    console.log(`Generating unit test classes for SpecFlow projects '${quote(config.specflow.projects)}'...`);
+    console.log(`Generating unit test classes for SpecFlow projects '${log.quote(config.specflow.projects)}'...`);
 
     const projects = globby.sync(config.specflow.projects);
     projects.forEach(function (project) {
-        console.log(`Generating unit test classes for SpecFlow project '${quote(path.basename(project))}'...`);
+        console.log(`Generating unit test classes for SpecFlow project '${log.quote(path.basename(project))}'...`);
         shell.exec(`${config.specflow.cmd} generateall ${project}`);
     });
 

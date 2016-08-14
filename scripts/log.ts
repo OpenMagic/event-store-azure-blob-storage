@@ -5,12 +5,16 @@ import * as chalk  from "chalk";
 class Log {
     private taskOperation = chalk.cyan;
 
-    public finishedTask(taskName): void {
+    public finishedTask(taskName: string): void {
         console.log(`Finished '${this.taskOperation(taskName)}'.`);
     }
 
-    public startingTask(taskName): void {
+    public startingTask(taskName: string): void {
         console.log(`Starting '${this.taskOperation(taskName)}'...`);
+    }
+
+    public quote(message: any): string {
+        return chalk.yellow(message);
     }
 }
 
