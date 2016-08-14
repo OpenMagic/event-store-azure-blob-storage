@@ -1,7 +1,10 @@
 // Install dependencies not handled by `npm install` 
 
+/// <reference path="../typings/index.d.ts" />
+
+import { config } from "../config";
+
 const taskOperation = require('chalk').cyan;
-const config = require('../config');
 const glob = require('glob');
 const nuget = require('npm-nuget');
 const path = require('path');

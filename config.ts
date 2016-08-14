@@ -1,3 +1,5 @@
+/// <reference path="typings/index.d.ts" />
+
 var path = require('path');
 
 const artifactsDirectory = 'artifacts';
@@ -6,7 +8,7 @@ const msbuild = {
     verbosity: 'Minimal'
 };
 
-const config = {
+export const config = {
     artifacts: artifactsDirectory,
     clean: {
         directories: [
@@ -42,5 +44,3 @@ const config = {
         version: "2.1"
     }
 };
-
-module.exports = config;
