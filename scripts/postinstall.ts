@@ -4,8 +4,8 @@
 
 import { config } from "../config";
 import { log } from "./log";
+import * as globby from "globby";
 
-const glob = require('glob');
 const nuget = require('npm-nuget');
 const path = require('path');
 const quote = require('./quote');
@@ -16,13 +16,12 @@ function createSpecFlowUnitTestClasses() {
 
     log.startingTask(task);
 
-    config.specflow.projects.forEach(function (projectsPattern) {
-        console.log(`Generating unit test classes for SpecFlow '${quote(projectsPattern)}'...`);
-        const projects = glob.sync(projectsPattern);
-        projects.forEach(function (project) {
-            console.log(`Generating unit test classes for SpecFlow '${quote(path.basename(project))}'...`);
-            shell.exec(`${config.specflow.cmd} generateall ${project}`);
-        })
+    console.log(`Generating unit test classes for SpecFlow projects '${quote(config.specflow.projects)}'...`);
+
+    const projects = globby.sync(config.specflow.projects);
+    projects.forEach(function (project) {
+        console.log(`Generating unit test classes for SpecFlow project '${quote(path.basename(project))}'...`);
+        shell.exec(`${config.specflow.cmd} generateall ${project}`);
     });
 
     log.finishedTask(task);
