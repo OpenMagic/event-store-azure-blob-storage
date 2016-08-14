@@ -4,14 +4,15 @@
 
 import { config } from "../config";
 import { log } from "./library/log";
-import * as shell from "./library/shell";
 import * as globby from "globby";
-import * as path from 'path';
+import * as path from "path";
+import * as shell from "./library/shell";
 
-const nuget = require('npm-nuget');
+// todo: create typings
+const nuget = require("npm-nuget");
 
 function createSpecFlowUnitTestClasses() {
-    const task = 'generate unit test classes for all SpecFlow projects'
+    const task = "generate unit test classes for all SpecFlow projects"
 
     log.startingTask(task);
 
@@ -31,7 +32,7 @@ function createSpecFlowUnitTestClasses() {
 }
 
 function restoreNuGetPackages() {
-    const task = 'restore NuGet packages';
+    const task = "restore NuGet packages";
 
     log.startingTask(task);
 
