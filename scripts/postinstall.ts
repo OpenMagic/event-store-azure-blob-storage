@@ -15,6 +15,7 @@ main();
 
 function main() {
     restoreNuGetPackages();
+    installXunitPackage();
     createSpecFlowUnitTestClasses();
 }
 
@@ -44,7 +45,7 @@ function restoreNuGetPackages() {
     log.startingTask(task);
 
     nuget.exec(`restore`);
-    nuget.exec(`install xunit.runner.console -OutputDirectory ./packages -ExcludeVersion -Version ${config.xunit.version}`);
+    nuget.exec(`install ${package.name} -OutputDirectory ./packages -ExcludeVersion -Version ${package.version}`);
 
     log.finishedTask(task);
 }

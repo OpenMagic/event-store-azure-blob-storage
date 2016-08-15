@@ -24,6 +24,12 @@ export const config = {
     ],
     msbuild: msbuild,
     nuget: {
+        install: [
+            {
+                name: "xunit.runner.console",
+                version: config.xunit.version
+            }
+        ]
         nuspecs: [
             '*.nuspec'
         ]
@@ -40,7 +46,6 @@ export const config = {
         assemblies: [
             `tests/**/bin/${msbuild.configuration}/*.Specifications.dll`,
             `tests/**/bin/${msbuild.configuration}/*.Tests.dll`
-        ],
-        version: "2.1"
+        ] 
     }
 };
