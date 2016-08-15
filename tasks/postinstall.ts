@@ -2,28 +2,18 @@
 
 /// <reference path="../typings/index.d.ts" />
 
-import { config } from "../config";
-import { log } from "./library/log";
+import { Config } from "../config";
+import { Log } from "./utils/log";
+import { Shell } from "./utils/shell";
+
+import * as gulp from "gulp";
 import * as globby from "globby";
 import * as path from "path";
-import * as shell from "./library/shell";
 
 // todo: create typings
 const nuget = require("npm-nuget");
 
-main();
-
-function main() {
-    restoreNuGetPackages();
-    installXunitPackage();
-    createSpecFlowUnitTestClasses();
-}
-
-function createSpecFlowUnitTestClasses() {
-    const task = "generate unit test classes for all SpecFlow projects"
-
-    log.startingTask(task);
-
+export function createSpecFlowUnitTestClasses(cb: Function, config: Config, log: Log, shell: Shell): gulp.TaskFunction {
     console.log(`Generating unit test classes for SpecFlow projects '${log.quote(config.specflow.projects)}'...`);
 
     const projects = globby.sync(config.specflow.projects);
@@ -36,16 +26,9 @@ function createSpecFlowUnitTestClasses() {
         );
     });
 
-    log.finishedTask(task);
+    return cb();
 }
 
-function restoreNuGetPackages() {
-    const task = "restore NuGet packages";
-
-    log.startingTask(task);
-
+export function restoreNuGetPackages(cb: Function): gulp. {
     nuget.exec(`restore`);
-    nuget.exec(`install ${package.name} -OutputDirectory ./packages -ExcludeVersion -Version ${package.version}`);
-
-    log.finishedTask(task);
 }

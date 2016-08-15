@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "description": ".NET Event Store using Azure Blob storage",
   "scripts": {
-    "build": "ts-node scripts/build",
+    "build": "echo todo: build && exit 1",
     "publish": "echo todo: publish && exit 1",
-    "postinstall": "npm install --global ts-node typescript && typings install && ts-node scripts/postinstall",
+    "postinstall": "npm install --global gulp ts-node typescript && typings install && ts-node scripts/postinstall",
     "preversion": "echo todo: version && exit 1",
     "test": "echo todo: test && exit 1"
   },
@@ -23,6 +23,7 @@
     "del": "^2.2.1",
     "git-rev-sync": "^1.6.0",
     "globby": "^6.0.0",
+    "gulp": "^3.9.1",
     "is-git-clean": "^1.0.0",
     "npm-msbuild": "git+https://github.com/TimMurphy/npm-msbuild.git#v3.0.3",
     "npm-nuget": "git+https://github.com/TimMurphy/npm-nuget.git#v3.1.3",
