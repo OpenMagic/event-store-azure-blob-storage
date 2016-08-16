@@ -5,6 +5,7 @@ import { Config } from "./config";
 import { Log } from "./scripts/gulp/log";
 import { Shell } from "./scripts/gulp/shell";
 
+import * as del from "del";
 import * as gulp from "gulp";
 import * as globby from "globby";
 import * as path from "path";
@@ -45,8 +46,8 @@ export class Gulpfile {
      */
     @Task()
     clean(cb: Function) {
-        log.warn("todo: clean");
-        cb();
+        log.info(`Deleting directories '${log.quote(config.clean.directories)}'`)
+        return del(config.clean.directories)
     }
 
     /**
