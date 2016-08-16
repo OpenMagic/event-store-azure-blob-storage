@@ -9,6 +9,10 @@ export class Log {
         console.log(message);
     }
 
+    public error(message: string): void {
+        console.log(chalk.red(message));
+    }
+    
     public quote(message: any): string {
         return chalk.yellow(message);
     }
