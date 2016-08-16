@@ -12,6 +12,7 @@ import * as path from "path";
 import * as taskListing from "gulp-task-listing";
 
 // todo: create typings
+const msbuild = require("npm-msbuild");
 const nuget = require("npm-nuget");
 
 const config = new Config();
@@ -46,25 +47,22 @@ export class Gulpfile {
      */
     @Task()
     clean(cb: Function) {
-        log.info(`Deleting directories '${log.quote(config.clean.directories)}'`)
+        log.info(`Deleting directories '${log.quote(config.clean.directories)}'...`)
         return del(config.clean.directories)
     }
 
     /**
      * Compile the solution.
      */
-    @SequenceTask()
-    compile() {
-        return ["clean", "compile_WithoutDependencies"]
-    }
+    @Task("compile", ["clean"])
+    compile(cb: Function) {
+        log.info(`Compiling solution...`);
 
-    /**
-     * Compile the solution without running dependencies.
-     */
-    @Task()
-    compile_WithoutDependencies(cb: Function) {
-        log.warn("todo: compile_WithoutDependencies");
-        cb();
+        console.log();
+        msbuild.exec(`/property:Configuration=${config.msbuild.configuration} /verbosity:${config.msbuild.verbosity}`);
+        console.log();
+
+        return cb();
     }
 
     /**
