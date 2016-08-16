@@ -45,7 +45,7 @@ export class Gulpfile {
      */
     @Task("postinstall_createUnitTestClassesSpecFlowFeatureFiles", ["postinstall_restoreNuGetPackages"])
     postinstall_createUnitTestClassesSpecFlowFeatureFiles(cb: Function) {
-        console.log(`Generating unit test classes for SpecFlow projects '${log.quote(config.specflow.projects)}'...`);
+        log.info(`Generating unit test classes for SpecFlow projects '${log.quote(config.specflow.projects)}'...`);
 
         const projects = globby.sync(config.specflow.projects);
         projects.forEach(function (project) {
@@ -65,8 +65,15 @@ export class Gulpfile {
      */
     @Task()
     postinstall_installSolutionNuGetPackages(cb: Function) {
-        log.error("todo");
-        cb();
+        log.info(`Installing solution level NuGet packages '${log.quote(config.nuget.solutionPackages.map(i => i.name))}'...`);
+
+        config.nuget.solutionPackages.forEach(function (pkg) {
+            const excludeVersion = pkg.excludeVersion ? "-ExcludeVersion" : "";
+            const cmd = `install ${pkg.name} -Version ${pkg.version} -OutputDirectory ${config.nuget.outputDirectory} ${excludeVersion}`;
+            nuget.exec(cmd);
+        });
+
+        return cb();
     }
 
     /**

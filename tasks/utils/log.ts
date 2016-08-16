@@ -1,16 +1,17 @@
 /// <reference path="../../typings/index.d.ts" />
 
 import * as chalk  from "chalk";
+const logger = require("gulplog");
 
 export class Log {
     private taskOperation = chalk.cyan;
 
     public info(message: string): void {
-        console.log(message);
+        logger.info(message);
     }
 
     public error(message: string): void {
-        console.log(chalk.red(message));
+        logger.error(message);
     }
     
     public quote(message: any): string {

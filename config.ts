@@ -14,13 +14,14 @@ export class Config {
         verbosity: string
     };
     nuget: {
-        install: [
+        nuspecs: string[],
+        outputDirectory: string,
+        solutionPackages: [
             {
                 name: string,
                 version: string,
                 excludeVersion: boolean
-            }],
-        nuspecs: string[]
+            }]
     };
     specflow: {
         cmd: string,
@@ -58,15 +59,16 @@ export class Config {
         this.msbuild = msbuild;
 
         this.nuget = {
-            install: [
+            nuspecs: [
+                "*.nuspec"
+            ],
+            outputDirectory: "packages",
+            solutionPackages: [
                 {
                     name: "xunit.runner.console",
                     version: "2.1",
                     excludeVersion: true
                 }
-            ],
-            nuspecs: [
-                "*.nuspec"
             ]
         };
 
