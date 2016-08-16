@@ -2,13 +2,12 @@
 
 import { Gulpclass, Task, SequenceTask } from "gulpclass/Decorators";
 import { Config } from "./config";
-import { Log } from "./tasks/utils/log";
-import { Shell } from "./tasks/utils/shell";
+import { Log } from "./scripts/gulp/log";
+import { Shell } from "./scripts/gulp/shell";
 
 import * as gulp from "gulp";
 import * as globby from "globby";
 import * as path from "path";
-import * as postinstall from "./tasks/postinstall";
 import * as taskListing from "gulp-task-listing";
 
 // todo: create typings
@@ -29,8 +28,59 @@ export class Gulpfile {
      */
     @Task()
     help(cb: Function) {
-        const excludeTasks = ["default", "Gulpfile"];
-        taskListing.withFilters(null, taskName => excludeTasks.indexOf(taskName) > -1)(cb);
+        const excludeTasks = ["default", "Gulpfile", "postinstall"];
+        taskListing.withFilters(null, taskName => excludeTasks.filter(value => value === taskName || taskName.indexOf(`${value}_`) === 0).length > 0)(cb);
+    }
+
+    /**
+     * Compile, test & create packages
+     */
+    @Task("build", ["package"])
+    build(cb: Function) {
+        cb();
+    }
+
+    /**
+     * Clean output directories
+     */
+    @Task()
+    clean(cb: Function) {
+        log.warn("todo: clean");
+        cb();
+    }
+
+    /**
+     * Compile the solution.
+     */
+    @SequenceTask()
+    compile() {
+        return ["clean", "compile_WithoutDependencies"]
+    }
+
+    /**
+     * Compile the solution without running dependencies.
+     */
+    @Task()
+    compile_WithoutDependencies(cb: Function) {
+        log.warn("todo: compile_WithoutDependencies");
+        cb();
+    }
+
+    /**
+     * Create nuget packages.
+     */
+    @SequenceTask()
+    package() {
+        return ["test", "package_WithoutDependencies"]
+    }
+
+    /**
+     * Create nuget packages without running dependencies.
+     */
+    @Task()
+    package_WithoutDependencies(cb: Function) {
+        log.warn("todo: package_WithoutDependencies");
+        cb();
     }
 
     /**
@@ -82,6 +132,23 @@ export class Gulpfile {
     @Task()
     postinstall_restoreNuGetPackages(cb: Function) {
         nuget.exec(`restore`);
+        cb();
+    }
+
+    /** 
+     * Run all tests.
+     */
+    @SequenceTask()
+    test() {
+        return ["compile", "test_WithoutDependencies"]
+    }
+
+    /** 
+     * Run all tests without running dependencies.
+     */
+    @Task()
+    test_WithoutDependencies(cb: Function) {
+        log.warn("todo: test_WithoutDependencies");
         cb();
     }
 }
