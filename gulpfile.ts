@@ -9,8 +9,10 @@ import * as del from "del";
 import * as globby from "globby";
 import * as gulp from "gulp";
 import * as gulpShell from "gulp-shell";
+import * as mkdirp from "mkdirp"
 import * as path from "path";
 import * as taskListing from "gulp-task-listing";
+import * as versions from "./scripts/versions";
 
 // todo: create typings
 const msbuild = require("npm-msbuild");
@@ -70,18 +72,22 @@ export class Gulpfile {
     /**
      * Create nuget packages.
      */
-    @SequenceTask()
+    @Task("package", dependencies(["test"]))
     package() {
-        return ["test", "package_WithoutDependencies"]
-    }
+        const src = config.nuget.nuspecs;
+        log.info(`Creating NuGet packages for '${src}'`);
 
-    /**
-     * Create nuget packages without running dependencies.
-     */
-    @Task()
-    package_WithoutDependencies(cb: Function) {
-        log.warn("todo: package_WithoutDependencies");
-        cb();
+        mkdirp.sync(config.artifacts);
+
+        // todo: gulp typings is incorrect
+        // const srcOption 
+        const srcOptions: any = { read: false };
+
+        const cmd = `${nuget.path()} pack <%= file.path %> -OutputDirectory ${config.artifacts} -Version ${versions.getNuGetVersion()} -Symbols -Properties "Configuration=${config.msbuild.configuration}"`;
+
+        return gulp
+            .src(src, srcOptions)
+            .pipe(gulpShell(cmd));
     }
 
     /**
@@ -151,15 +157,6 @@ export class Gulpfile {
         return gulp
             .src(src, srcOptions)
             .pipe(gulpShell(`${config.xunit.cmd} <%= file.path %>`));
-    }
-
-    /** 
-     * Run all tests without running dependencies.
-     */
-    @Task()
-    test_WithoutDependencies(cb: Function) {
-        log.warn("todo: test_WithoutDependencies");
-        cb();
     }
 }
 

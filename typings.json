@@ -11,6 +11,7 @@
     "del": "registry:npm/del#2.2.0+20160416211512",
     "globby": "registry:npm/globby#3.0.0+20160723033700",
     "gulp": "registry:npm/gulp#4.0.0-alpha.2+20160723033700",
+    "mkdirp": "registry:npm/mkdirp#0.5.0+20160723033700",
     "vinyl-fs": "registry:npm/vinyl-fs#2.4.3+20160817102725"
   }
 }

@@ -1,10 +1,6 @@
 const path = require('path');
 
-module.exports.getAssemblyVersion = getAssemblyVersion;
-module.exports.getNpmVersion = getNpmVersion;
-module.exports.getNuGetVersion = getNuGetVersion;
-
-function getAssemblyVersion() {
+export function getAssemblyVersion() {
     const version = getNpmVersion();
     const hyphen = version.indexOf('-');
 
@@ -17,14 +13,14 @@ function getAssemblyVersion() {
     return `${version.substring(0, hyphen)}.${preReleaseVersion}`;
 }
 
-function getNpmVersion() {
-    const package = require(path.join(__dirname, '../package.json'));
-    const version = package.version;
+export function getNpmVersion() {
+    const packageObj = require(path.join(__dirname, '../package.json'));
+    const version = packageObj.version;
 
     return version;
 }
 
-function getNuGetVersion() {
+export function getNuGetVersion() {
     const version = getNpmVersion();
     const hyphen = version.indexOf('-');
 
