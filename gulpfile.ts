@@ -34,8 +34,14 @@ export class Gulpfile {
      */
     @Task()
     help(cb: Function) {
+        const mainTasks = ["build", "help", "test", "watch"]
         const excludeTasks = ["default", "Gulpfile", "postinstall"];
-        taskListing.withFilters(null, taskName => excludeTasks.filter(value => value === taskName || taskName.indexOf(`${value}_`) === 0).length > 0)(cb);
+
+        taskListing
+            .withFilters(
+                taskName => mainTasks.indexOf(taskName) < 0, 
+                taskName => excludeTasks.filter(value => value === taskName || taskName.indexOf(`${value}_`) === 0).length > 0)
+            (cb);
     }
 
     /**
