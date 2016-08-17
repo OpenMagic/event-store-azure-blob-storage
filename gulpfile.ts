@@ -15,9 +15,11 @@ import * as taskListing from "gulp-task-listing";
 import * as versions from "./scripts/versions";
 
 // todo: create typings
+const argv = require('yargs').argv;
+const git = require('git-rev-sync');
+const isGitClean = require('is-git-clean');
 const msbuild = require("npm-msbuild");
 const nuget = require("npm-nuget");
-const argv = require('yargs').argv;
 
 const config = new Config();
 const log = new Log();
@@ -34,7 +36,7 @@ export class Gulpfile {
      */
     @Task()
     help(cb: Function) {
-        const mainTasks = ["build", "help", "test", "watch"]
+        const mainTasks = ["build", "help", "publish", "test", "watch"]
         const excludeTasks = ["default", "Gulpfile", "postinstall"];
 
         taskListing
@@ -148,6 +150,30 @@ export class Gulpfile {
         cb();
     }
 
+    /** 
+     * Bump version number and create NuGet packages
+     */
+    @SequenceTask()
+    publish() {
+        const tasks = [
+            "test",
+            "publish_validateGitIsClean"
+        ];
+
+        return argv.ignoreDependencies ? tasks.slice(1) : tasks;
+    }
+
+    /**
+     * Throws error if git repository is dirty
+     */
+    @Task()
+    publish_validateGitIsClean(cb: Function) {
+        if (isGitClean.sync()) {
+            return cb();
+        }
+        throw new Error("Git repository must be clean before running the requested task.");
+    }
+    
     /** 
      * Run all tests.
      */
