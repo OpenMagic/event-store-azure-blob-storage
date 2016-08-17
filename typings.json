@@ -1,5 +1,6 @@
 {
   "globalDevDependencies": {
+    "gulp-shell": "registry:dt/gulp-shell#0.0.0+20160316155526",
     "gulp-task-listing": "registry:dt/gulp-task-listing#0.0.0+20160316155526",
     "node": "registry:dt/node#6.0.0+20160807145350",
     "require": "registry:dt/require#2.1.20+20160316155526",
@@ -9,6 +10,7 @@
     "chalk": "registry:npm/chalk#1.1.1+20160812215109",
     "del": "registry:npm/del#2.2.0+20160416211512",
     "globby": "registry:npm/globby#3.0.0+20160723033700",
-    "gulp": "registry:npm/gulp#4.0.0-alpha.2+20160723033700"
+    "gulp": "registry:npm/gulp#4.0.0-alpha.2+20160723033700",
+    "vinyl-fs": "registry:npm/vinyl-fs#2.4.3+20160817102725"
   }
 }

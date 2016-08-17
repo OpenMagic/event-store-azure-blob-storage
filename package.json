@@ -24,6 +24,7 @@
     "git-rev-sync": "^1.6.0",
     "globby": "^6.0.0",
     "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
     "gulp-task-listing": "^1.0.1",
     "gulpclass": "^0.1.1",
     "gulplog": "^1.0.0",
@@ -33,7 +34,8 @@
     "replace": "^0.3.0",
     "shelljs": "^0.7.0",
     "ts-node": "^1.2.2",
-    "typescript": "^1.8.10"
+    "typescript": "^1.8.10",
+    "yargs": "^5.0.0"
   },
   "private": true
 }

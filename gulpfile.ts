@@ -6,14 +6,16 @@ import { Log } from "./scripts/gulp/log";
 import { Shell } from "./scripts/gulp/shell";
 
 import * as del from "del";
-import * as gulp from "gulp";
 import * as globby from "globby";
+import * as gulp from "gulp";
+import * as gulpShell from "gulp-shell";
 import * as path from "path";
 import * as taskListing from "gulp-task-listing";
 
 // todo: create typings
 const msbuild = require("npm-msbuild");
 const nuget = require("npm-nuget");
+const argv = require('yargs').argv;
 
 const config = new Config();
 const log = new Log();
@@ -37,7 +39,7 @@ export class Gulpfile {
     /**
      * Compile, test & create packages
      */
-    @Task("build", ["package"])
+    @Task("build", dependencies(["package"]))
     build(cb: Function) {
         cb();
     }
@@ -54,7 +56,7 @@ export class Gulpfile {
     /**
      * Compile the solution.
      */
-    @Task("compile", ["clean"])
+    @Task("compile", dependencies(["clean"]))
     compile(cb: Function) {
         log.info(`Compiling solution...`);
 
@@ -85,14 +87,14 @@ export class Gulpfile {
     /**
      * Install dependencies not handled by `npm install`.
      */
-    @Task("postinstall", ["postinstall_createUnitTestClassesSpecFlowFeatureFiles", "postinstall_installSolutionNuGetPackages"])
+    @Task("postinstall", dependencies(["postinstall_createUnitTestClassesSpecFlowFeatureFiles", "postinstall_installSolutionNuGetPackages"]))
     postinstall() {
     }
 
     /**
      * Create unit test class for SpecFlow's .feature files.
      */
-    @Task("postinstall_createUnitTestClassesSpecFlowFeatureFiles", ["postinstall_restoreNuGetPackages"])
+    @Task("postinstall_createUnitTestClassesSpecFlowFeatureFiles", dependencies(["postinstall_restoreNuGetPackages"]))
     postinstall_createUnitTestClassesSpecFlowFeatureFiles(cb: Function) {
         log.info(`Generating unit test classes for SpecFlow projects '${log.quote(config.specflow.projects)}'...`);
 
@@ -137,9 +139,18 @@ export class Gulpfile {
     /** 
      * Run all tests.
      */
-    @SequenceTask()
+    @Task(null, dependencies(["compile"]))
     test() {
-        return ["compile", "test_WithoutDependencies"]
+        const src = config.xunit.assemblies;
+        log.info(`Running tests for '${log.quote(src)}'...`);
+
+        // todo: gulp typings is incorrect
+        // const srcOption { read: false }
+        const srcOptions: any = null;
+
+        return gulp
+            .src(src, srcOptions)
+            .pipe(gulpShell(`${config.xunit.cmd} <%= file.path %>`));
     }
 
     /** 
@@ -150,4 +161,12 @@ export class Gulpfile {
         log.warn("todo: test_WithoutDependencies");
         cb();
     }
+}
+
+/**
+ * Ignore dependencies if --ignoreDependencies argument passed to gulp.
+ * e.g. gulp test --ignoreDependencies
+ */
+function dependencies(value: string[]): string[] {
+    return argv.ignoreDependencies ? null : value;
 }
