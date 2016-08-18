@@ -1,10 +1,20 @@
+import { Log } from "../scripts/gulp/log";
+import { Shell } from "../scripts/gulp/shell";
+
 const argv = require('yargs').argv;
 const git = require("git-rev-sync");
 const isGitClean = require("is-git-clean");
 
 export class Publisher {
 
-    publish(cb: Function): any {
+    constructor(private shell: Shell, private log: Log) {
+    }
+
+    static publish(shell: Shell, log: Log, cb: Function): any {
+        return new Publisher(shell, log).publishImpl(cb);
+    }
+
+    private publishImpl(cb: Function): any {
         this.validateGitIsClean();
 
         const bump = argv.bump;
@@ -31,12 +41,13 @@ export class Publisher {
         return cb();
     }
 
-    private createAndCheckoutGitBranch(branchName) {
-        $.log.info(`Creating branch "${$.quote(branchName)}"`);
-        $.shell.exec(`git checkout -b ${branchName}`);
+    private createAndCheckoutGitBranch(branchName: string) {
+        this.log.info(`Creating branch "${this.log.quote(branchName)}"`);
+        throw new Error("todo");
+        //this.shell.exec(`git checkout -b ${branchName}`);
     }
 
-    private createAndCheckoutPublishBranch() {
+    private createAndCheckoutPublishBranch(): string {
         throw "todo";
         // const currentBranch = git.branch();
 
@@ -44,21 +55,42 @@ export class Publisher {
         // createAndCheckoutGitBranch("publish");
     }
 
-    private create
-    private deleteGitBranchIfExists(branchName) {
-        if ($.shell.exec(`git show-ref --verify --quiet refs/heads/${branchName}`).code !== 0) {
-            return;
-        }
-        $.log.info(`Deleting branch "${$.quote(branchName)}"`);
-        $.shell.exec(`git branch -d ${branchName}`);
+    private createPackage() {
+        throw new Error("todo");
     }
+
+    private deleteGitBranchIfExists(branchName: string) {
+        throw new Error("todo");
+        // if (this.shell.exec(`git show-ref --verify --quiet refs/heads/${branchName}`).code !== 0) {
+        //     return;
+        // }
+        // this.log.info(`Deleting branch "${$.quote(branchName)}"`);
+        // this.shell.exec(`git branch -d ${branchName}`);
+    }
+
+    private mergePublishBranch(branchName: string) {
+        throw new Error("todo");
+    }
+
+    private pushRepository() {
+        throw new Error("todo");
+    }
+
+    private rollbackPublishBranch() {
+        throw new Error("todo");
+    }
+    
+    private rollbackTag() {
+        throw new Error("todo");
+    }    
 
     // Update the version number
-    private updateVersion(newVersion) {
-        shell.exec(`npm version ${newVersion}`);
+    private updateVersion(newVersion: string) {
+        throw new Error("todo");
+        // this.shell.exec(`npm version ${newVersion}`);
     }
 
-    private validateBump(level) {
+    private validateBump(level: string) {
         const levels = "major, minor, patch, premajor, preminor, prepatch, prerelease";
 
         if (levels.split(", ").indexOf(level) < 0) {
